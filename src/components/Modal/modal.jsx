@@ -7,7 +7,7 @@ export const Modal = ({
 }) => {
 
   return (
-    <div className={css.overlay} onClick={(e) => closeModal(e)}> ++++++++++++++
+    <div className={css.overlay} onClick={(e) => closeModal(e)}>
       <div className={css.modal}>
         <img src={item.largeImageURL} alt=""/>
       </div>
