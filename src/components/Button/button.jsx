@@ -2,9 +2,11 @@ import css from '../styles.module.css';
 import PropTypes from 'prop-types';
 
 export const Button = ({ onPushBut }) => {
-    return (
+  return (
+      <div className={css.buttonSize}>
         <button className={css.button} onClick={() => { onPushBut() }}
-            type="sbutton">Load more</button>
+        type="sbutton">Load more</button>
+    </div>
     )
 }
 
