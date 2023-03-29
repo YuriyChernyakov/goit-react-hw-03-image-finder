@@ -6,7 +6,6 @@ import { Loader } from './Loader/loader';
 import { Modal } from './Modal/modal';
 import css from './styles.module.css';
 
-const KEYCODE_ENTER = 13;
 const KEYCODE_ESC = 27;
 
 class App extends Component {
@@ -16,6 +15,7 @@ class App extends Component {
     page: 1,
     isLoading: false,
     modalItem: null,
+    pageLoad: this.page += 1,
   };
 
   componentDidMount() {
@@ -65,7 +65,7 @@ class App extends Component {
   findImg = (event) => {
     this.setState({ isLoading: true });
     event.preventDefault();
-    fetch(`https://pixabay.com/api/?q=${this.state.searchName}&page=${this.state.page}&key=33018629-fbe0e3699e0e90be35e2ad394&image_type=photo&orientation=horizontal&per_page=12`)
+    fetch(`https://pixabay.com/api/?q=${this.state.searchName}&page=${this.state.pageLoad}&key=33018629-fbe0e3699e0e90be35e2ad394&image_type=photo&orientation=horizontal&per_page=12`)
       .then(res => res.json())
       .then(res => {
         this.setState({
@@ -83,10 +83,10 @@ class App extends Component {
     });
   };
 
+
   pushBut = () => {
     this.setState({ isLoading: true });
-    let page = this.state.page += 1;
-    fetch(`https://pixabay.com/api/?q=${this.state.searchName}&page=${page}&key=33018629-fbe0e3699e0e90be35e2ad394&image_type=photo&orientation=horizontal&per_page=12`)
+    fetch(`https://pixabay.com/api/?q=${this.state.searchName}&page=${this.state.page}&key=33018629-fbe0e3699e0e90be35e2ad394&image_type=photo&orientation=horizontal&per_page=12`)
       .then(res => res.json())
       .then(res => {
         this.setState(prevState => ({
