@@ -19,15 +19,15 @@ class App extends Component {
   };
 
   componentDidMount() {
-    this.setState({ isLoading: true });
-    fetch('https://pixabay.com/api/?q=cat&page=1&key=33018629-fbe0e3699e0e90be35e2ad394&image_type=photo&orientation=horizontal&per_page=12')
-      .then(res => res.json())
-      .then(res => {
-        this.setState({
-          articles: res.hits,
-          isLoading: false,
-        });
-      });
+    // this.setState({ isLoading: true });
+    // fetch('https://pixabay.com/api/?q=cat&page=1&key=33018629-fbe0e3699e0e90be35e2ad394&image_type=photo&orientation=horizontal&per_page=12')
+    //   .then(res => res.json())
+    //   .then(res => {
+    //     this.setState({
+    //       articles: res.hits,
+    //       isLoading: false,
+    //     });
+    //   });
 
     document.addEventListener('keydown', this.keyDownEventsHandle);
   }
