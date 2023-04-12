@@ -15,20 +15,9 @@ class App extends Component {
     page: 1,
     isLoading: false,
     modalItem: null,
-    pageLoad: this.page += 1,
   };
 
   componentDidMount() {
-    // this.setState({ isLoading: true });
-    // fetch('https://pixabay.com/api/?q=cat&page=1&key=33018629-fbe0e3699e0e90be35e2ad394&image_type=photo&orientation=horizontal&per_page=12')
-    //   .then(res => res.json())
-    //   .then(res => {
-    //     this.setState({
-    //       articles: res.hits,
-    //       isLoading: false,
-    //     });
-    //   });
-
     document.addEventListener('keydown', this.keyDownEventsHandle);
   }
 
@@ -65,7 +54,7 @@ class App extends Component {
   findImg = (event) => {
     this.setState({ isLoading: true });
     event.preventDefault();
-    fetch(`https://pixabay.com/api/?q=${this.state.searchName}&page=${this.state.pageLoad}&key=33018629-fbe0e3699e0e90be35e2ad394&image_type=photo&orientation=horizontal&per_page=12`)
+    fetch(`https://pixabay.com/api/?q=${this.state.searchName}&page=${this.state.page}&key=33018629-fbe0e3699e0e90be35e2ad394&image_type=photo&orientation=horizontal&per_page=12`)
       .then(res => res.json())
       .then(res => {
         this.setState({
@@ -85,14 +74,34 @@ class App extends Component {
 
 
   pushBut = () => {
+    let currentPage = this.state.page += 1;
     this.setState({ isLoading: true });
-    fetch(`https://pixabay.com/api/?q=${this.state.searchName}&page=${this.state.page}&key=33018629-fbe0e3699e0e90be35e2ad394&image_type=photo&orientation=horizontal&per_page=12`)
+    fetch(`https://pixabay.com/api/?q=${this.state.searchName}&page=${currentPage}&key=33018629-fbe0e3699e0e90be35e2ad394&image_type=photo&orientation=horizontal&per_page=12`)
       .then(res => res.json())
       .then(res => {
-        this.setState(prevState => ({
-          articles: [...prevState.articles, ...res.hits],
-          isLoading: false,
-        }));
+        // this.setState(prevState => ({
+        //   articles: this.state.changeName ? [...res.hits] : [...prevState.articles, ...res.hits],
+        //   isLoading: false,
+        //   changeName: false,
+        //   page: currentPage,
+        // }));
+
+        this.setState(prevState => {
+          
+          if (prevState.searchName === this.state.searchName) {
+            return {
+              articles: [...prevState.articles, ...res.hits],
+              isLoading: false,
+              page: currentPage,
+            }
+          }
+          return{
+            articles: [...res.hits],
+            isLoading: false,
+            page: currentPage,
+          }
+        })
+
       });
   };
 
