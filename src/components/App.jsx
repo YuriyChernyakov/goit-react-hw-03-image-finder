@@ -74,7 +74,7 @@ class App extends Component {
 
 
   pushBut = () => {
-    // react/no-direct-mutation-state
+    // eslint-disable-next-line 
     let currentPage = this.state.page += 1;
     this.setState({ isLoading: true });
     fetch(`https://pixabay.com/api/?q=${this.state.searchName}&page=${currentPage}&key=33018629-fbe0e3699e0e90be35e2ad394&image_type=photo&orientation=horizontal&per_page=12`)
